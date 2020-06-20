@@ -5,14 +5,16 @@ public class IndianZombie : EnemyBase
     public override void InitializeStats()
     {
         maxHealth = 7;
-        attack = 3;
+        attack = 2;
         defense = 1;
         reward = 2;
     }
 
     public override void MakeAttack()
     {
-        BattleManager.Instance.player.TakeDamage(this);
+        int damage = BattleManager.Instance.player.TakeDamage(this);
+        PlayAttackAnimation(damage);
+        PlayAttackSound();
     }
 
     public override void MakeMove()
@@ -44,6 +46,12 @@ public class IndianZombie : EnemyBase
                 maxIndex = 2;
 
             board.MoveTo(this, xPos + maxIndex - 1, yPos);
+        }
+
+        if (xPos != currentTile.indexX || yPos != currentTile.indexY)
+        {
+            PlayMovementWaitAnimation();
+            PlayMovementSound();
         }
     }
 }

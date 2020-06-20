@@ -6,14 +6,18 @@ public class Zombie : EnemyBase
     {
         maxHealth = 10;
         attack = 3;
-        defense = 2;
+        defense = 1;
         reward = 1;
     }
 
     public override void MakeAttack()
     {
         if (currentTile.indexY == 0)
-            BattleManager.Instance.player.TakeDamage(this);
+        {
+            int damage = BattleManager.Instance.player.TakeDamage(this);
+            PlayAttackAnimation(damage);
+            PlayAttackSound();
+        }
     }
 
     public override void MakeMove()
@@ -45,6 +49,12 @@ public class Zombie : EnemyBase
                 maxIndex = 2;
 
             board.MoveTo(this, xPos + maxIndex - 1, yPos);
+        }
+
+        if (xPos != currentTile.indexX || yPos != currentTile.indexY)
+        {
+            PlayMovementWaitAnimation();
+            PlayMovementSound();
         }
     }
 }

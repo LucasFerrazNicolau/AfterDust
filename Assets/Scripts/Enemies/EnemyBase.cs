@@ -8,8 +8,9 @@ public abstract class EnemyBase : MonoBehaviour
 
     private SpriteRenderer sr;
 
-    public Material defaultMaterial;
-    public Material aimMaterial;
+    private AudioSource audioSource;
+    public AudioClip moveSound;
+    public AudioClip attackSound;
 
     // Battle Stats
     public int maxHealth;
@@ -33,6 +34,8 @@ public abstract class EnemyBase : MonoBehaviour
     {
         isDead = false;
 
+        audioSource = gameObject.AddComponent<AudioSource>();
+
         InitializeStats();
         currentHealth = maxHealth;
     }
@@ -50,6 +53,16 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        MouseEnterRoutine();
+    }
+
+    private void OnMouseExit()
+    {
+        MouseExitRoutine();
+    }
+
+    public void MouseEnterRoutine()
+    {
         if (!BattleManager.Instance.locked &&
             BattleManager.Instance.state == BattleManager.BattleState.PlayerMovement)
         {
@@ -62,8 +75,11 @@ public abstract class EnemyBase : MonoBehaviour
             if (aimedTiles != null && aimedTiles.Count > 0)
             {
                 foreach (var tile in aimedTiles)
+                {
+                    tile.Aim();
                     if (tile.enemy != null)
                         BattleManager.Instance.AimEnemy(tile.enemy);
+                }
             }
             else
             {
@@ -74,7 +90,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
-    private void OnMouseExit()
+    public void MouseExitRoutine()
     {
         if (!BattleManager.Instance.locked &&
             BattleManager.Instance.state == BattleManager.BattleState.PlayerMovement)
@@ -88,8 +104,6 @@ public abstract class EnemyBase : MonoBehaviour
         int damage = Mathf.CeilToInt(BattleManager.Instance.player.EquippedWeapon.damage * 1.0f / defense);
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
 
-        Debug.Log("Player deal " + damage + " damage to " + this);
-
         PlayDamageAnimation(damage);
     }
 
@@ -100,8 +114,7 @@ public abstract class EnemyBase : MonoBehaviour
 
         BattleManager.Instance.player.money += reward;
 
-        //isDead = true;
-        PlayeDeathAnimation();
+        PlayDeathAnimation();
     }
 
     public void Terminate()
@@ -116,15 +129,32 @@ public abstract class EnemyBase : MonoBehaviour
         );
     }
 
-    public void PlayeDeathAnimation()
+    public void PlayDeathAnimation()
     {
         BattleManager.Instance.animations.Insert(0,
             sr.DOFade(0, 1).OnComplete(Terminate)
         );
     }
 
+    public void PlayMovementWaitAnimation()
+    {
+        BattleManager.Instance.animations.Insert(0,
+            sr.DOFade(1, 0.5f));
+    }
+
     public void PlayAttackAnimation(int damage)
     {
+        BattleManager.Instance.animations.Insert(0,
+            transform.DOMoveY(transform.position.y + 10, 0.5f).SetLoops(2, LoopType.Yoyo));
+    }
 
+    public void PlayMovementSound()
+    {
+        audioSource.PlayOneShot(moveSound);
+    }
+
+    public void PlayAttackSound()
+    {
+        audioSource.PlayOneShot(attackSound);
     }
 }

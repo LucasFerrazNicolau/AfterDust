@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5272471906734570325}
   - component: {fileID: 6858130414752299445}
-  - component: {fileID: -8112535716198940901}
+  - component: {fileID: -5508919902563510569}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -44,18 +44,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c5b76fb852d24448bfc75696e2f1f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseCursor: {fileID: 2800000, guid: 5ab9ca4a796140144b855ffb10d11e67, type: 3}
+  attackSound: {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
+  tradeSound: {fileID: 8300000, guid: 9158afb6966d445db9caf1dccf7acbcc, type: 3}
   damage: 0
   magazineSize: 0
   currentMagazine: 0
   cost: 0
---- !u!212 &-8112535716198940901
+--- !u!212 &-5508919902563510569
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283497043929013832}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -86,7 +89,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e1a44f7bb53700d42ba703a4e29ef547, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 17fab2f3d4c1fc74a8fc0da20551d02e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

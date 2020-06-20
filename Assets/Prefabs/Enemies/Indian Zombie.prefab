@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  aimMaterial: {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  moveSound: {fileID: 8300000, guid: fc8da02e95435406f89db024451a0bb8, type: 3}
+  attackSound: {fileID: 8300000, guid: 5318c0c653ad54db7be081c1a391547e, type: 3}
   maxHealth: 0
   currentHealth: 0
   attack: 0
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: feeda51da28a19443beee8edc2cd160b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f4ebfecb715e0984b9fb50a82fd1964e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

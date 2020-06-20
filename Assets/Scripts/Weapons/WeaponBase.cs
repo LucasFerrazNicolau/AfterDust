@@ -3,6 +3,12 @@ using UnityEngine;
 
 public abstract class WeaponBase : MonoBehaviour
 {
+    public Texture2D mouseCursor;
+
+    private AudioSource audioSource;
+    public AudioClip attackSound;
+    public AudioClip tradeSound;
+
     // Stats
     public int damage;
     public int magazineSize;
@@ -15,7 +21,19 @@ public abstract class WeaponBase : MonoBehaviour
 
     private void Awake()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
+
         InitializeStats();
         currentMagazine = magazineSize;
+    }
+
+    public void PlayAttackSound()
+    {
+        audioSource.PlayOneShot(attackSound, 0.5f);
+    }
+
+    public void PlayTradeSound()
+    {
+        audioSource.PlayOneShot(tradeSound, 0.5f);
     }
 }
