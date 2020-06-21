@@ -231,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   youWinText: {fileID: 1008914181}
   thanksText: {fileID: 77342362}
-  winTheme: {fileID: 8300000, guid: 5ce589e37f58a87469848aa71cbbf29b, type: 3}
+  winTheme: {fileID: 8300000, guid: 23ea00a6858ac2141ab764aad4101a13, type: 3}
 --- !u!4 &515610336
 Transform:
   m_ObjectHideFlags: 0
